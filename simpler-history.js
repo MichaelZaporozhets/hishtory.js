@@ -1,11 +1,7 @@
-
-var openPage = function(page,args) {
-    SH.history.open(page,args);
-
-    SH.info.page = page;
-    SH.info.pageArgs = args;
-
+var openPage = function(page) {
+    SH.history.open(page);
     console.log('do some logic for the page: '+page);
+    return false;
 };
 
 var SH = {};
@@ -24,24 +20,25 @@ SH.pages = {
     my : [
         {
             sub: {
-                subpage1 : [
+                feed : [
                   
                 ],
-                subpage2 : [
+                settings : [
                   
                 ]
             }
         }
-    ],
-    pagenotfound : []
+    ]
 };
 
 SH.loadPage = function(page,args) {
-    console.log(page+' | '+args);
     if(typeof args == 'undefined') {
         args = ''
     }
+    SH.info.page = page;
+    SH.info.pageArgs = args;
     openPage(page,args);
+    return false;
 };
 
 // #### BEGIN PATROL LOGIC ####
