@@ -56,7 +56,7 @@ SH.history.manage = function() {
 		}
 	}
 	if(SH.history.pushState == true && document.location.hash.substr(0,3) !== '#!/') {
-		var state = window.location.pathname;
+		var state = window.location.pathname.replace(SH.info.root,'');
 		var fullState = '';
 		if(state.substr(0,1) == '/') {
 			state = state.substr(1);
