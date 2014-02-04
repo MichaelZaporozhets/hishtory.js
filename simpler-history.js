@@ -20,14 +20,11 @@ SH.loadPage = function(page,args) {
 	SH.refOpenFunc(page,args);
 	return false;
 };
-
-// #### BEGIN PATROL LOGIC ####
 SH.history = {};
-
 SH.history.currentPage;
 SH.history.currentPageArgs = [];
 SH.history.stop = false;
-SH.history.open = function(name) {
+SH.open = function(name) {
 	if(SH.history.pushState) {
 		window.history.pushState('', name, "/"+name);
 	} else {
@@ -35,7 +32,6 @@ SH.history.open = function(name) {
 	}
 };
 SH.history.manage = function() {
-	
 	var manangeChange = function() {
 		if(typeof SH.pages[state] !== 'undefined') {
 			if(typeof SH.pages[state][0] !== 'undefined' && typeof SH.pages[state][0].sub !== 'undefined') {
@@ -46,7 +42,7 @@ SH.history.manage = function() {
 					if(typeof SH.pages[state] !== 'undefined') {
 						SH.loadPage(state,args);
 					} else {
-						SH.history.open('pagenotfound');
+						SH.open('pagenotfound');
 					}
 				}
 			} else {
@@ -55,10 +51,9 @@ SH.history.manage = function() {
 			SH.info.lastPage = SH.history.currentPage;
 			SH.history.currentPage = state;
 		} else {
-			SH.history.open('pagenotfound');
+			SH.open('pagenotfound');
 		}
 	}
-
 	if(SH.history.pushState == true && document.location.hash.substr(0,3) !== '#!/') {
 		var state = window.location.pathname;
 		var fullState = '';
@@ -83,12 +78,12 @@ SH.history.manage = function() {
 			}
 		} else {
 			SH.info.page = 'home';
-			SH.history.open('home');
+			SH.open('home');
 		}
 	} else {
 		var hash = document.location.hash;
 		if(SH.history.pushState == true) {
-			SH.history.open(hash.substr(3));
+			SH.open(hash.substr(3));
 			return false;
 		}
 		if(hash.length > 1 && window.location.pathname == '/') {
@@ -111,7 +106,7 @@ SH.history.manage = function() {
 			window.location.assign( '/#!/' +window.location.pathname.substr(1));
 		} else {
 			SH.info.page = 'home';
-			SH.history.open('home');
+			SH.open('home');
 		}
 	}
 };
@@ -146,7 +141,6 @@ SH.init = function(refOpenFunc,pushState) {
 	}
 	return;
 };
-
 
 var openPage = function(page) {
 	console.log('do some logic for the page: '+page);
