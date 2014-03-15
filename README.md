@@ -1,4 +1,4 @@
-simpler-history
+Hishtory.js
 ===============
 HTML5 pushState without the tears.
 
