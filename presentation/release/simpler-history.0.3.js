@@ -5,7 +5,7 @@ SH.info = {
 	domain : '',
 	holdingDomain : '',
 	lastPage: '',
-	root: window.location.pathname,
+	root: '/',
 	land: ''
 };
 SH.refOpenFunc = function(){return false;};
